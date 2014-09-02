@@ -7,7 +7,7 @@ class LocationService()(implicit val bindingModule: BindingModule) extends Injec
 
   val geocoder = injectOptional [Geocoder] getOrElse { new GeocoderImpl }
 
-  def getCoordinates(location: String): Option[(Float, Float)] = {
+  def getCoordinates(location: String): Option[(Double, Double)] = {
     geocoder.getCoordinates(location)
   }
 
