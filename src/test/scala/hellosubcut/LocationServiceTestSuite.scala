@@ -35,4 +35,18 @@ class LocationServiceTestSuite extends FunSuite with ShouldMatchers {
     }
   }
 
+  test("Mock location service with test configuration returns coordinates for San Francisco") {
+    implicit val bindingModule = TestConfigurationModule
+    val locationService = new LocationService()
+    locationService.getCoordinates("San Francisco") should be(Some((37.7749295, -122.4194155)))
+  }
+
+  test("Mock location service with test configuration returns fake coordinates for all other locations") {
+    implicit val bindingModule = TestConfigurationModule
+    val locationService = new LocationService()
+    locationService.getCoordinates("Chicago") should be(None)
+    locationService.getCoordinates("Los Angeles") should be(None)
+    locationService.getCoordinates("New York") should be(None)
+  }
+
 }
